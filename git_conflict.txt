@@ -1,0 +1,28 @@
+git switch -c feature-branch
+echo "Hello Mars!" >> test.txt
+git commit -am "Hello Mars"
+git push --set-upstream origin feature-branch
+
+git switch master
+echo "Hello Venus!" >> test.txt
+git commit -am "Hello Venus"
+git push
+
+git switch feature
+git switch -c master-merge
+git pull origin master
+# fix conflicts in text editor
+git add .
+git commit
+git push --set-upstream origin master-merge
+
+# create pull request in github from master-merge to feature
+# squash the PR (do not delete the branch)
+
+git switch feature
+git pull origin feature
+git pull origin master
+# ==> CONFLICT!
+# PR from feature to master also not possible
+
+# fix by recreating PR from master-merge to feature and create merge commit
